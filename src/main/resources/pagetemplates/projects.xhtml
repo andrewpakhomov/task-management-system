@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml" layout:decorator="default-template">
+    <head>
+        <title>Проекты</title>
+
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="container">
+                
+                <H3>Создать новый проект</H3>
+                <hr/>
+                <form class="form-inline" method="POST" action="/projects/new">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="title" id="title" placeholder="Название проекта" th:value="${title}"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="responsible" id="responsible" placeholder="Отвественный" th:value="${responsible}"/>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Создать"></input>
+                </form>
+                
+                
+            </div>
+            <div class="container">
+                
+                <h3>Активные проекты</h3>
+                <hr/>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Название
+                            </th>
+                            <th>
+                                Ответственый
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="current : ${projects}">
+                            <td>
+                                <a th:href="${'/projects/'+current.id}" th:text="${current.id}"></a>
+                            </td>
+                            <td th:text="${current.title}">
+                            </td>
+                            <td th:text="${current.responsible}">
+                            </td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" layout:decorator="default-template">
+    <head>
+        <title th:text="${'Проект '+project.title}"></title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="container">
+                <h3>Добавить задачу к проекту <span th:text="${project.title}"></span></h3>
+                <hr/>
+                <form class="form-inline" method="POST" th:action="${project.id+'/tasks/new'}">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="title" id="title" placeholder="Название задачи" th:value="${title}"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="responsible" id="responsible" placeholder="Отвественный" th:value="${responsible}"/>
+                    </div>
+                    <input class="btn btn-default" type="submit" value="Создать"></input>
+                </form>
+            </div>
+            
+            <div class="container">
+                <h3>Задачи проекта</h3>
+                <hr/>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Номер задачи</th>
+                        <th>Название</th>
+                        <th>Ответственный</th>        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="current : ${project.tasks}">
+                        <td><a th:href="${'/tasks/'+current.id}" th:text="${current.id}"></a></td>
+                        <td th:text="${current.title}"></td>
+                        <td th:text="${current.responsible}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+    </body>
+</html>
